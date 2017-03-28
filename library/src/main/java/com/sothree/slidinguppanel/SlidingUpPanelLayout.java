@@ -458,6 +458,13 @@ public class SlidingUpPanelLayout extends ViewGroup {
     }
 
     /**
+     * @return The current slide offset
+     */
+    public float getCurrentSlideOffset() {
+        return mSlideOffset;
+    }
+
+    /**
      * @return The current parallax offset
      */
     public int getCurrentParallaxOffset() {
