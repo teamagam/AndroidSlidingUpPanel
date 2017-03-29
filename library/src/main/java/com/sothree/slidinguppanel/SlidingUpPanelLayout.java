@@ -83,6 +83,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
     public static final String SLIDING_STATE = "sliding_state";
 
     /**
+     * Tag for the slide offset stored inside the bundle
+     */
+    public static final String SLIDE_OFFSET = "slide_offset";
+
+    /**
      * Minimum velocity that will be detected as a fling
      */
     private int mMinFlingVelocity = DEFAULT_MIN_FLING_VELOCITY;
@@ -1327,6 +1332,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
         Bundle bundle = new Bundle();
         bundle.putParcelable("superState", super.onSaveInstanceState());
         bundle.putSerializable(SLIDING_STATE, mSlideState != PanelState.DRAGGING ? mSlideState : mLastNotDraggingSlideState);
+        bundle.putFloat(SLIDE_OFFSET, mSlideOffset);
         return bundle;
     }
 
@@ -1336,6 +1342,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
             Bundle bundle = (Bundle) state;
             mSlideState = (PanelState) bundle.getSerializable(SLIDING_STATE);
             mSlideState = mSlideState == null ? DEFAULT_SLIDE_STATE : mSlideState;
+            mSlideOffset = bundle.getFloat(SLIDE_OFFSET);
             state = bundle.getParcelable("superState");
         }
         super.onRestoreInstanceState(state);
